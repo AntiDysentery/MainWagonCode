@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>AntiDysentery</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="smoothie.js"></script>
+    <script src="jmin.js"></script>
+    <script src="app.js"></script>
+    <link rel="preload" href="fire.gif" as="image">
+</head>
+
+<body>
+    <div class="header">
+        <h1>--== AntiDysentery ==--</h1>
+    </div>
+
+
+    <div class="actions">
+        <fieldset>
+            <legend></legend>
+            <div class="card">
+                <input class="hide" type="radio" id="tab-1" name="tractor" checked="checked" />
+                <label for="tab-1">Main Power</label>
+                <article class="page tab-1">
+                    <div class="buttonarray">
+                        <button id="btnMainLed1"      onclick="mainPress(this)" class="mainAll">Main LEDs</button>
+                        <button id="btnMainLed2"      onclick="mainPress(this)" class="mainAll">Aux LEDs</button>
+                        <button id="btnMainFlame"     onclick="mainPress(this)" class="mainAll">Fire System</button>
+                        <button id="btnMainSound"     onclick="mainPress(this)" class="mainAll">Sound System</button>
+                        <button id="btnMainHeadlight" onclick="mainPress(this)" class="mainAll">Headlights</button>
+                        <button id="btnMainAux1"      onclick="mainPress(this)" class="mainAll">Aux 1</button>
+                        <button id="btnMainStop"      onclick="mainPress(this)" class="on">Stop Wagon</button>
+                        <button id="btnMainStart"     onclick="mainPress(this)" class="on">Start Wagon</button>
+                        <button id="btnMainAllOff"    onclick="mainPress(this)" class="on">All Off</button>
+                    </div>
+                </article>
+
+                <input class="hide" type="radio" id="tab-2" name="tractor" />
+                <label for="tab-2">Flame Poofer</label>
+                <article class="page tab-2">
+					<p id = "cannonInfo" class="cannonInfo">Cannons Armed</p>
+					<div class="buttonarray">
+                        <button id="btnFireFtB"     onclick="flamePress(this)" class="btnFlame">Front to Back</button>
+                        <button id="btnFireLed2"    onclick="flamePress(this)" class="btnFlame" style="float:right">Random</button>
+                        <button id="btnFireCannon1" onclick="flamePress(this)" class="btnFlame">Cannon 1</button>
+                        <button id="btnFireCannon2" onclick="flamePress(this)" class="btnFlame" style="float:right">Cannon 2</button>
+                        <button id="btnFireCannon3" onclick="flamePress(this)" class="btnFlame">Cannon 3</button>
+                        <button id="btnFireCannon4" onclick="flamePress(this)" class="btnFlame"  style="float:right">Cannon 4</button>
+					</div>
+					<div class="slidecontainer">
+						<p>Flame On Time: <span id="rngFlameOnVal"></span></p>
+						<input type="range" min="1" max="100" value="50" class="slider" id="rngFlameOn">
+						<p>Flame Off Time: <span id="rngFlameOffVal"></span></p>
+						<input type="range" min="1" max="100" value="50" class="slider" id="rngFlameOff">
+						&nbsp
+					</div>
+				</article>
+
+                <input class="hide" type="radio" id="tab-3" name="tractor" />
+                <label for="tab-3">Led Toggle</label>
+                <article class="page tab-3">
+                    <div class="buttonarray">
+						<button id="btnSparkle" onclick="ledPress(this)" class="notFlame">Sparkle</button>
+						<button id="btnSparkleFade" onclick="ledPress(this)" class="notFlame">Fade</button>
+						<button id="btnSparkleColor" onclick="ledPress(this)" class="notFlame"></button>
+                        <button id="btnChase"   onclick="ledPress(this)" class="notFlame" style="float:right">Chase</button>
+						<button id="btnChaseFade" onclick="ledPress(this)" class="notFlame">Fade</button>
+                        <button id="btnChaseColor"   onclick="ledPress(this)" class="notFlame" style="float:right">n/a</button>
+                        <button id="btnBackground" onclick="ledPress(this)" class="notFlame" style="float:right">Background</button>
+						<button id="btnNoise" onclick="ledPress(this)" class="notFlame">Noise</button>
+                        <button id="btnBackgroundColor" onclick="ledPress(this)" class="notFlame" style="float:right">n/a</button>
+                        <button id="btnPacman"    onclick="ledPress(this)" class="notFlame">PacMan</button>
+                        <button id="btnFlame"   onclick="ledPress(this)" style="float:right">Flame Effect</button>
+                        <button id="btnRandom"   onclick="ledPress(this)" style="float:right">Randomize All</button>
+                    </div>
+                </article>
+				
+                <input class="hide" type="radio" id="tab-4" name="tractor" />
+                <label for="tab-4">Led Values</label>
+                <article class="page tab-4">
+                    <div class="slidecontainer">
+						<p>Sparkle Value: <span id="rngSparkleVal"></span></p>
+						<input type="range" min="1" max="100" value="50" class="slider" id="rngSparkle">
+						<p>Sparkle Hue: <span id="rngSparkleHueVal"></span></p>
+						<input type="range" min="1" max="360" value="50" class="slider hue" id="rngSparkleHue">
+						<p>Chase Distance: <span id="rngChaseVal"></span></p>
+						<input type="range" min="1" max="100" value="50" class="slider" id="rngChase">
+						<p>Chase Hue: <span id="rngChaseHueVal"></span></p>
+						<input type="range" min="1" max="360" value="90" class="slider hue" id="rngChaseHue">
+						<p>Background Intensity: <span id="rngBackgroundVal"></span></p>
+						<input type="range" min="1" max="200" value="90" class="slider" id="rngBackground">
+						<p>Background Hue: <span id="rngBackgroundHueVal"></span></p>
+						<input type="range" min="1" max="360" value="90" class="slider hue" id="rngBackgroundHue">
+						<p>Fade Value: <span id="rngFadeVal"></span></p>
+						<input type="range" min="1" max="10" value="7" class="slider" id="rngFade">
+						<p>Speed: <span id="rngSpeedVal"></span></p>
+						<input type="range" min="1" max="100" value="50" class="slider" id="rngSpeed">
+						&nbsp
+					</div>
+				</article>
+
+				<input class="hide" type="radio" id="tab-5" name="tractor" />
+                <label for="tab-5">About</label>
+                <article class="page tab-5">
+                    <div class="aboutContainer" style = "width: 100%">
+						<div class = "aboutText">
+							<p class="about" color="#ffffff">
+								AntiDysentery <br />  
+								Flame Throwing Covered Wagon<br />
+								Created by Scott Schipper<br />
+								Website Design by Chris Schipper<br />
+							</p>
+							<pre id="jsoninfo"></pre>
+						</div>
+					</div>
+
+					
+                </article>
+            </div>
+        </fieldset>
+    </div>
+
+	<div class="history">
+        <fieldset>
+            <legend>Main Voltage</legend>
+            <canvas id="HistoryChart" class="HistoryChart"></canvas>
+        </fieldset>
+    </div>
+
+    <div class="statistics">
+        <fieldset id="damn" onclick="GetStatus()">
+            <legend id="PinTitle"></legend>
+            <p>Main System Voltage:
+                <span id="mainVoltage"></span>
+            </p>
+            <p>Drivetrain Voltage:
+                <span id="auxVoltage"></span>
+            </p>
+            <p>Chip Resets:
+                <span id="chipResets"></span>
+            </p>
+            <p>Requests per minute:
+                <span id="requestsPerMinute"></span>
+            </p>            
+			<p>Total Requests:
+                <span id="totalRequests"></span>
+            </p>
+        </fieldset>
+
+        <fieldset id="damn2">
+            <legend id="PinTitle2"></legend>
+            <p>Speed:
+                <span id="gpsSpeed"></span>
+            </p>
+            <p>Heading:
+                <span id="gpsDir"></span>
+            </p>
+            <p>Altitude:
+                <span id="gpsAlt"></span>
+            </p>
+            <p>Latitude:
+                <span id="gpsLat"></span>
+            </p>
+            <p>Longitude:
+                <span id="gpsLon"></span>
+            </p>
+        </fieldset>
+    </div>
+
+    <svg id="splash" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
+        <pattern id="p-fire" viewBox="30 10 186 200" patternUnits="userSpaceOnUse" width="156" height="200" x="0" y="0">
+            <image xlink:href="fire.gif" width="256" height="300"></image>
+        </pattern>
+
+        <text text-anchor="middle" x="50%" y="40%" style="font-size: 200px;">
+            AntiDysentery
+        </text>
+        <text text-anchor="middle" x="50%" y="80%" style="font-size: 100px;">
+            Burningman 2019
+        </text>
+    </svg>
+</body>
