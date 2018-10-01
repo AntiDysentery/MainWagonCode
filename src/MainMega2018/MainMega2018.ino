@@ -8,8 +8,8 @@ Getting Git Down.- Ima Noob
 #include <LiquidTWI.h>
 #include <RotaryEncoder.h>
 
-                       //#include "WagonMegaConstants.h"
-                       RotaryEncoder encoder(2, 3);
+//#include "WagonMegaConstants.h"
+RotaryEncoder encoder(2, 3);
 
 extern LedClass Led;
 extern SparkleClass Sparkle;
